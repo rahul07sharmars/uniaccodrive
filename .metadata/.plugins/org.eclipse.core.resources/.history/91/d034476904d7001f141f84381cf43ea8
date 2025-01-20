@@ -1,0 +1,45 @@
+package com.example.demo.controller;
+
+import com.example.demo.entity.*;
+import com.example.demo.service.PaymentService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/payments")
+public class PaymentController {
+    @Autowired
+    private PaymentService paymentService;
+
+    // Record a payment
+    @PostMapping
+    public ResponseEntity<Payment> recordPayment(@RequestBody PaymentRequestDto paymentRequest) {
+        Payment payment = paymentService.recordPayment(
+                paymentRequest.getUserId(),
+                paymentRequest.getAmount(),
+                paymentRequest.getRepaymentPlanId()
+        );
+        return ResponseEntity.ok(payment);
+    }
+        
+//
+//    // Get active repayment plans and outstanding balance
+//    @GetMapping("/active-plans")
+//    public ResponseEntity<List<RepaymentPlan>> getActiveRepaymentPlans(@RequestParam Long userId) {
+//        return ResponseEntity.ok(paymentService.getActiveRepaymentPlans(userId));
+//    }
+//
+//    @GetMapping("/outstanding-balance")
+//    public ResponseEntity<Double> getOutstandingBalance(@RequestParam Long userId) {
+//        return ResponseEntity.ok(paymentService.getOutstandingBalance(userId));
+//    }
+//
+//    // Get EMI-wise outstanding balance
+//    @GetMapping("/emi-wise-balance")
+//    public ResponseEntity<List<EMISchedule>> getEMIWiseOutstanding(@RequestParam Long repaymentPlanId) {
+//        return ResponseEntity.ok(paymentService.getEMIWiseOutstanding(repaymentPlanId));
+//    }
+}

@@ -1,0 +1,29 @@
+package com.example.demo.controller;
+
+import com.example.demo.entity.Purchase;
+import com.example.demo.entity.PurchaseType;
+import com.example.demo.service.PurchaseService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/purchases")
+public class PurchaseController {
+    @Autowired
+    private PurchaseService purchaseService;
+
+    @PostMapping
+    public ResponseEntity<Purchase> makePurchase(@RequestBody PurchaseRequest purchaseRequest) {
+        return ResponseEntity.ok(
+                purchaseService.makePurchase(
+                        purchaseRequest.getUserId(),
+                        purchaseRequest.getAmount(),
+                        purchaseRequest.getPurchaseType(),
+                        purchaseRequest.getDuration(),
+                        purchaseRequest.getInterestRate()
+                )
+        );
+    }
+}
+

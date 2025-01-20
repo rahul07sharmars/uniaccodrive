@@ -1,0 +1,23 @@
+package com.example.demo.entity;
+import lombok.Data;
+import jakarta.persistence.*;
+import java.util.Date;
+
+@Entity
+@Data
+public class EMISchedule {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "repayment_plan_id", nullable = false)
+    private RepaymentPlan repaymentPlan;
+
+    private Date dueDate;
+    private double amount;
+    private boolean isPaid;
+
+    // Getters and Setters
+}
+

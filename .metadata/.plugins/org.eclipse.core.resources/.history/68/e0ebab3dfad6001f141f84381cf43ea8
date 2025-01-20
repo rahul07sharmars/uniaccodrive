@@ -1,0 +1,22 @@
+package com.example.demo.entity;
+
+import jakarta.persistence.*;
+import java.util.Date;
+import java.util.List;
+import lombok.Data;
+
+@Entity
+@Data
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private String email;
+    private String phone;
+    private double creditLimit;
+    private double availableCredit;
+
+    // Getters and Setters
+}

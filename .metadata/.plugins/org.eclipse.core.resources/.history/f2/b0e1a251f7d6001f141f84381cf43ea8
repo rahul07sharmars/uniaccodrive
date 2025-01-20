@@ -1,0 +1,27 @@
+package com.example.demo.entity;
+import lombok.Data;
+
+@Entity
+@Data
+public class RepaymentPlan {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    private double totalAmount;
+    private double monthlyInstallment;
+    private int durationInMonths;
+    private double interestRate;
+    private double penaltyRate;
+    private Date startDate;
+
+    @OneToMany(mappedBy = "repaymentPlan", cascade = CascadeType.ALL)
+    private List<EMISchedule> emiSchedules;
+
+    // Getters and Setters
+}
+

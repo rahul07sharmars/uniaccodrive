@@ -1,0 +1,27 @@
+package com.example.demo.entity;
+import lombok.Data;
+
+import java.util.Date;
+
+import jakarta.persistence.*;
+
+
+@Entity
+@Data
+public class Purchase {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    private double amount;
+    private Date purchaseDate;
+
+    @Enumerated(EnumType.STRING)
+    private PurchaseType purchaseType;
+
+    // Getters and Setters
+}
